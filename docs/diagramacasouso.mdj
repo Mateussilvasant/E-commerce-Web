@@ -3087,9 +3087,9 @@
 												"$ref": "AAAAAAFtyuj3Q9dsFUA="
 											},
 											"font": "Arial;13;1",
-											"left": 618.5,
+											"left": 620,
 											"top": 566.5,
-											"width": 132,
+											"width": 137,
 											"height": 13,
 											"text": "Status Pedido"
 										},
@@ -3122,9 +3122,9 @@
 										}
 									],
 									"font": "Arial;13;0",
-									"left": 613.5,
+									"left": 615,
 									"top": 559.5,
-									"width": 142,
+									"width": 147,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAFtyuj3Q9dtK44="
@@ -3224,7 +3224,7 @@
 							"containerChangeable": true,
 							"left": 584,
 							"top": 552,
-							"width": 201,
+							"width": 209,
 							"height": 41,
 							"nameCompartment": {
 								"$ref": "AAAAAAFtyuj3Q9dsFUA="
