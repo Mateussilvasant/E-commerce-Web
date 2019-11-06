@@ -10,7 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "sc_produto")
@@ -21,29 +21,26 @@ public class Produto {
 	@Column(name = "sc_id_Produto")
 	private Integer idProduto;
 
-	@NotNull
 	@Column(name = "sc_nome")
+	@NotBlank
 	private String nome;
 
-	@NotNull
 	@Column(name = "sc_descricao")
+	@NotBlank
 	private String descricao;
 
-	@NotNull
 	@Column(name = "sc_marca")
+	@NotBlank
 	private String marca;
 
-	@NotNull
 	@Column(name = "sc_preco")
 	private double preco;
 
-	@NotNull
 	@Column(name = "sc_status")
-	private boolean status;
+	private String status;
 
-	@NotNull
 	@JoinColumn(name = "sc_id_produto")
-	@OneToMany
+	@OneToMany()
 	private List<Categoria> categorias;
 
 	public Integer getIdProduto() {
@@ -86,11 +83,11 @@ public class Produto {
 		this.preco = preco;
 	}
 
-	public boolean isStatus() {
+	public String getStatus() {
 		return status;
 	}
 
-	public void setStatus(boolean status) {
+	public void setStatus(String status) {
 		this.status = status;
 	}
 
@@ -100,6 +97,12 @@ public class Produto {
 
 	public void setCategorias(List<Categoria> categorias) {
 		this.categorias = categorias;
+	}
+
+	@Override
+	public String toString() {
+		return "Produto [idProduto=" + idProduto + ", nome=" + nome + ", descricao=" + descricao + ", marca=" + marca
+				+ ", preco=" + preco + ", status=" + status + ", categorias=" + categorias + "]";
 	}
 
 }

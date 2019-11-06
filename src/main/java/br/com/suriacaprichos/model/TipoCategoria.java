@@ -25,6 +25,12 @@ public class TipoCategoria {
 	@Column(name = "sc_descricao")
 	private String descricao;
 
+	public TipoCategoria() {};
+	
+	public TipoCategoria(Integer id) {
+		setIdTipoCategoria(id);
+	}
+
 	public Integer getIdTipoCategoria() {
 		return idTipoCategoria;
 	}
@@ -47,6 +53,12 @@ public class TipoCategoria {
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
+	}
+
+	@Override
+	public String toString() {
+		return "TipoCategoria [idTipoCategoria=" + idTipoCategoria + ", nome=" + nome + ", descricao=" + descricao
+				+ "]";
 	}
 
 }

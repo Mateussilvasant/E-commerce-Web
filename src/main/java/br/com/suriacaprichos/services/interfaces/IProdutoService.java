@@ -7,7 +7,7 @@ import br.com.suriacaprichos.model.Produto;
 
 public interface IProdutoService {
 
-	public void cadastrarProduto(Produto produto);
+	public Produto cadastrarProduto(Produto produto);
 
 	public void deletarProduto(Integer id);
 
@@ -16,5 +16,7 @@ public interface IProdutoService {
 	public Optional<Produto> consultarProduto(Integer id);
 
 	public List<Produto> listarProdutos();
+
+	public Produto consultarProdutoPorNome(String nomeProduto);
 
 }

@@ -21,8 +21,8 @@ public class ProdutoService implements IProdutoService {
 
 	@Transactional
 	@Override
-	public void cadastrarProduto(Produto produto) {
-		repositorio.save(produto);
+	public Produto cadastrarProduto(Produto produto) {
+		return repositorio.save(produto);
 	}
 
 	@Transactional
@@ -53,6 +53,13 @@ public class ProdutoService implements IProdutoService {
 	@Override
 	public List<Produto> listarProdutos() {
 		return repositorio.findAll();
+	}
+
+	@Transactional
+	@Override
+	public Produto consultarProdutoPorNome(String nomeProduto) {
+		Produto produto = repositorio.findByNome(nomeProduto);
+		return produto;
 	}
 
 }
