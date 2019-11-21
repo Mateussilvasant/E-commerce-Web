@@ -3,32 +3,24 @@ package br.com.suriacaprichos.controller;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
-import javax.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.suriacaprichos.model.Categoria;
 import br.com.suriacaprichos.model.Produto;
 import br.com.suriacaprichos.model.TipoCategoria;
-import br.com.suriacaprichos.repositories.CategoriaRepository;
 import br.com.suriacaprichos.services.CategoriaService;
 import br.com.suriacaprichos.services.ProdutoService;
-import br.com.suriacaprichos.services.TipoCategoriaService;
 
 @Controller
 @RequestMapping("/produtos")
@@ -42,12 +34,27 @@ public class ProdutoController {
 
 	@RequestMapping("/cadastrarProduto")
 	public ModelAndView cadastrarProdutoForm(Produto produto) {
-		return new ModelAndView("cadastrarProduto");
+		ModelAndView model = new ModelAndView("cadastrarProduto");
+		return model;
+	}
+
+	@RequestMapping("/gerenciar/{page}")
+	public ModelAndView gerenciarProdutos(@PathVariable("page") int pagina) {
+		ModelAndView model = new ModelAndView("gerenciarProdutos");
+
+		Page<Produto> produtos = null;
+
+		if (pagina >= 0) {
+			produtos = produtoService.listarProdutos(pagina);
+			model.addObject("produtosPage", produtos);
+		}
+
+		return model;
 	}
 
 	@PostMapping("/cadastrar")
 	public ModelAndView cadastrarProduto(@Valid Produto produto,
-			@RequestParam(value = "categoriasIDs") Integer[] categoriasIDs, RedirectAttributes redirect) {
+			@RequestParam(value = "categoriasIDs") Integer[] categoriasIDs) {
 
 		Produto produtoCadastrado = produtoService.cadastrarProduto(produto);
 
@@ -66,6 +73,19 @@ public class ProdutoController {
 		return model;
 	}
 
+	@RequestMapping("/visualizar/{idProduto}")
+	public ModelAndView consultarProduto(@PathVariable("idProduto") Integer id) {
+		Optional<Produto> produto = produtoService.consultarProduto(id);
+
+		ModelAndView model = new ModelAndView("visualizarProduto");
+
+		if (produto.isPresent()) {
+			model.addObject("produto", produto.get());
+		}
+
+		return model;
+	}
+
 	private List<Categoria> getCategorias(List<Integer> categoriasIDs, Produto produto) {
 		List<Categoria> categorias = new ArrayList<>();
 
@@ -78,13 +98,6 @@ public class ProdutoController {
 		});
 
 		return categorias;
-	}
-
-	@RequestMapping("/consultar/{nomeProduto}")
-	public Produto consultarProduto(@PathVariable("nomeProduto") String nomeProduto) {
-		Produto produto = produtoService.consultarProdutoPorNome(nomeProduto);
-
-		return produto;
 	}
 
 }

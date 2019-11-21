@@ -1,7 +1,8 @@
 package br.com.suriacaprichos.services.interfaces;
 
-import java.util.List;
 import java.util.Optional;
+
+import org.springframework.data.domain.Page;
 
 import br.com.suriacaprichos.model.Produto;
 
@@ -15,7 +16,7 @@ public interface IProdutoService {
 
 	public Optional<Produto> consultarProduto(Integer id);
 
-	public List<Produto> listarProdutos();
+	public Page<Produto> listarProdutos(int page);
 
 	public Produto consultarProdutoPorNome(String nomeProduto);
 

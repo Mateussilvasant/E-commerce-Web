@@ -1,45 +1,41 @@
-$(document).ready(
-		function() {
+$(document).ready(function () {
 
-			$("#cadastrarProdutoID").click(function() {
-				cadastrarProdutoValidacao();
-			});
+	$("#cadastrarProdutoID").click(function () {
+		cadastrarProdutoValidacao();
+	});
 
-			$("#formCadastrarTipoCategoria").submit(function(event) {
+	$("#formCadastrarTipoCategoria").submit(function (event) {
 
-				event.preventDefault();
-				novaCategoriaSubmit();
+		event.preventDefault();
+		novaCategoriaSubmit();
 
-			});
+	});
 
-			$("#categoriaBuscadaID").keyup(function(event) {
+	$("input#categoriaBuscadaID").on('keyup touchend', function (event) {
+		event.preventDefault();
 
-				event.preventDefault();
+		if (event.keyCode != null) {
+			listarTipoCategoria(this.value);
+		}
+	});
 
-				if (event.keyCode != null) {
-					listarTipoCategoria(this.value);
-				}
-			});
+	$("#tabelaCategorias").on('click', 'input[type="button"]', function (event) {
 
-			$("#tabelaCategorias").on('click', 'input[value="Adicionar"]',
-					function(event) {
+		event.preventDefault();
+		adicionarCategoriaPage($(this));
 
-						event.preventDefault();
-						adicionarCategoriaPage($(this));
+	});
 
-					});
+	$("#listCategorias").on('click', '#botaoRemover', function (event) {
+		event.preventDefault();
+		removerCategoriaLista($(this));
+	});
 
-			$("#listCategorias").on('click', 'input[value="X"]',
-					function(event) {
-						event.preventDefault();
-						removerCategoriaLista($(this));
-					});
+	$("#btnFecharMsgCat").click(function (event) {
+		esconderMsgCadastroCategoria();
+	});
 
-			$("#btnFecharMsgCat").click(function(event) {
-				esconderMsgCadastroCategoria();
-			});
-
-		});
+});
 
 function removerCategoriaLista(lista) {
 	lista.closest("li").remove();
@@ -63,15 +59,15 @@ function adicionarCategoriaPage(tabela) {
 
 	if (!nomeExistente.length) {
 		$("#listCategorias")
-				.append(
-						$('<li  class="list-group-item p-1" style="border: none"> '
-								+ '<input form="formCadastrarProduto" name="categoriasIDs" type="hidden" value="'
-								+ idCategoria.val()
-								+ '"\> <span class="badge badge-pill badge-dark badge-pill-md nomeCat"  id="'
-								+ nome
-								+ '" >'
-								+ nome
-								+ '<input type="button" id="botaoRemover" value="X" class="btn btn-dark btn-sm"/> </span></li>'));
+			.append(
+				$('<li  class="list-group-item p-1" style="border: none"> '
+					+ '<input form="formCadastrarProduto" name="categoriasIDs" type="hidden" value="'
+					+ idCategoria.val()
+					+ '"\> <span class="badge badge-pill badge-dark badge-pill-md nomeCat"  id="'
+					+ nome
+					+ '" >'
+					+ nome
+					+ '<input type="button" id="botaoRemover" value="&#x2716;" class="btn btn-dark btn-sm"/> </span></li>'));
 	}
 
 }
@@ -79,48 +75,48 @@ function adicionarCategoriaPage(tabela) {
 function listarTipoCategoria(palavra) {
 
 	$
-			.ajax({
-				url : "http://localhost:8080/tipoCategoria/listarCategoriasPorNome/"
-						+ palavra,
-				type : "get",
-				cache : false,
-				dataType : "json",
-				timeout : 200000,
-				contentType : "application/json; charset=utf-8",
+		.ajax({
+			url: "http://localhost:8080/tipoCategoria/listarCategoriasPorNome/"
+				+ palavra,
+			type: "get",
+			cache: false,
+			dataType: "json",
+			timeout: 200000,
+			contentType: "application/json; charset=utf-8",
 
-				success : function(data) {
-					var categorias = JSON.parse(JSON.stringify(data));
+			success: function (data) {
+				var categorias = JSON.parse(JSON.stringify(data));
 
-					$("#tabelaCategorias tr").remove();
+				$("#tabelaCategorias tr").remove();
 
-					$
-							.each(
-									categorias,
-									function(index, value) {
-										$("#tabelaCategorias")
-												.last()
-												.append(
-														"<tr>"
-																+ "<td><input class=\"idField\" type=\"hidden\" value=\""
-																+ value.idTipoCategoria
-																+ "\" id=\"catID"
-																+ index
-																+ "\" />"
-																+ "<p class=\"nomeCategoria\">"
-																+ value.nome
-																+ "</p>"
-																+ "<small>"
-																+ value.descricao
-																+ "</small></td>"
-																+ "<td><input type=\"button\" value=\"Adicionar\" class=\"btn btn-secondary btn-sm\" id=\"addCat\"/></td><tr> ");
-									});
+				$
+					.each(
+						categorias,
+						function (index, value) {
+							$("#tabelaCategorias")
+								.last()
+								.append(
+									"<tr>"
+									+ "<td><input class=\"idField\" type=\"hidden\" value=\""
+									+ value.idTipoCategoria
+									+ "\" id=\"catID"
+									+ index
+									+ "\" />"
+									+ "<p class=\"nomeCategoria\">"
+									+ value.nome
+									+ "</p>"
+									+ "<small>"
+									+ value.descricao
+									+ "</small></td>"
+									+ "<td><input type=\"button\" value=\"&#x271a;\" class=\"btn btn-secondary btn-sm\" id=\"addCat\"/></td><tr> ");
+						});
 
-				},
-				error : function(e) {
-					$("#tabelaCategorias tr").remove();
-				}
+			},
+			error: function (e) {
+				$("#tabelaCategorias tr").remove();
+			}
 
-			});
+		});
 
 }
 
@@ -133,24 +129,24 @@ function novaCategoriaSubmit() {
 	var mensagem = $("#mensagemResultCat");
 
 	$.ajax({
-		url : "http://localhost:8080/tipoCategoria/salvarCategoria",
-		data : JSON.stringify(values),
-		type : "post",
-		cache : false,
-		timeout : 200000,
-		dataType : "json",
-		contentType : "application/json; charset=utf-8",
-		success : function(data) {
+		url: "http://localhost:8080/tipoCategoria/salvarCategoria",
+		data: JSON.stringify(values),
+		type: "post",
+		cache: false,
+		timeout: 200000,
+		dataType: "json",
+		contentType: "application/json; charset=utf-8",
+		success: function (data) {
 
 			$("#msgCatP").text(
-					'Categoria "' + values["nome"]
-							+ '" cadastrada com sucesso!');
+				'Categoria "' + values["nome"]
+				+ '" cadastrada com sucesso!');
 			mensagem.css('display', 'block');
 
 			$("#cadastrarTipoCategoriaID").css('display', 'none');
 		},
 
-		error : function(e) {
+		error: function (e) {
 
 			mensagem.toggleClass("alert-danger");
 			$("#msgCatP").text("Ocorreu um erro, categoria não cadastrada!");
@@ -183,7 +179,7 @@ function cadastrarProdutoValidacao() {
 	if (descricao.val().length == 0) {
 		descricao.addClass('is-invalid');
 		$('#msgValidDescricao').text(
-				"Por favor, informe a descrição do produto!");
+			"Por favor, informe a descrição do produto!");
 		valido = false;
 	}
 	if (marca.val().length == 0) {
@@ -193,9 +189,9 @@ function cadastrarProdutoValidacao() {
 	}
 
 	if (preco.val() < 1.00) {
-		marca.addClass('is-invalid');
+		preco.addClass('is-invalid');
 		$('#msgValidPreco')
-				.text("Por favor, informe um preço maior que R$1,00");
+			.text("Por favor, informe um preço maior que R$1,00");
 		valido = false;
 	}
 

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE-edge">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Cadastrar Produto</title>
+<link href="/resources/css/bootstrap.min.css" rel="stylesheet">
+<link href="/resources/css/style.css" rel="stylesheet">
+</head>
+<body>
+
+	<div class="main">
+
+	<c:import url="menuVertical.jsp"></c:import>
+
+	<div class="container-fluid">
+		<div class="table-responsive">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Nome</th>
+						<th>Pre�o</th>
+						<th>Opções</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach var="produto" items="${produtosPage.getContent()}">
+						<tr>
+							<input value="${produto.idProduto}" type="hidden">
+							<td>${produto.nome}</td>
+							<fmt:setLocale value = "pt_BR"/>
+							<td><fmt:formatNumber value="${produto.preco}" type="currency" /></td>
+							<td>
+								<a href='http://localhost:8080/produtos/editar/${produto.idProduto}' ><div class="pl-2"><small>Editar</small> <i class="fas fa-edit"></i></div></a>
+								<a href='http://localhost:8080/produtos/visualizar/${produto.idProduto}'><div class="pl-2"><small>visualizar</small> <i class="fas fa-eye"></i></div></a>
+								<a href='http://localhost:8080/produtos/excluir/${produto.idProduto}'><div class="pl-2"><small>Excluir</small> <i class="fas fa-trash-alt"></i></div></a>
+							</td>
+						</tr>
+					</c:forEach>
+				
+				</tbody>
+			
+			</table>
+
+				<nav aria-label="Outros Produtos">
+						<ul class="pagination justify-content-start">
+							<c:forEach var="i" begin="0" end="${produtosPage.getTotalPages() - 1}" >
+								<li class="page-item"><a class="page-link" href="/produtos/gerenciar/${i}">${i}</a></li>
+							</c:forEach>
+						</ul>
+					</nav>
+		</div>
+	</div>
+	</div>
+
+	<script src="/resources/js/jquery-3.4.1.min.js"></script>
+	<script src="/resources/js/popper.min.js"></script>
+	<script src="/resources/js/bootstrap.min.js"></script>
+	<script src="/resources/js/script.js"></script>
+	<script src="/resources/ajax/produtos.js" charset="UTF-8"></script>
+</body>
+</html>
