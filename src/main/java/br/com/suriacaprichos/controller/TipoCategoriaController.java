@@ -16,6 +16,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import br.com.suriacaprichos.model.TipoCategoria;
 import br.com.suriacaprichos.services.TipoCategoriaService;
 
+/**
+ * @author Mateus Silva
+ *
+ */
+
 @RequestMapping(path = "tipoCategoria/")
 @Controller
 public class TipoCategoriaController {

@@ -12,6 +12,11 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
+/**
+ * @author Mateus Silva
+ *
+ */
+
 @Entity
 @Table(name = "sc_produto")
 public class Produto {

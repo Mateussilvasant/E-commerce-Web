@@ -6,6 +6,11 @@ import org.springframework.stereotype.Repository;
 
 import br.com.suriacaprichos.model.Produto;
 
+/**
+ * @author Mateus Silva
+ *
+ */
+
 @Repository
 public interface ProdutoRepository extends JpaRepository<Produto, Integer> {
 

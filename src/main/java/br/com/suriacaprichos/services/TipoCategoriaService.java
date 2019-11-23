@@ -12,6 +12,11 @@ import br.com.suriacaprichos.model.TipoCategoria;
 import br.com.suriacaprichos.repositories.TipoCategoriaRepository;
 import br.com.suriacaprichos.services.interfaces.ITipoCategoria;
 
+/**
+ * @author Mateus Silva
+ *
+ */
+
 @Service
 public class TipoCategoriaService implements ITipoCategoria {
 

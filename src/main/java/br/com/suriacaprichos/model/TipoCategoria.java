@@ -8,6 +8,11 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+/**
+ * @author Mateus Silva
+ *
+ */
+
 @Entity
 @Table(name = "sc_tipo_categorias")
 public class TipoCategoria {
@@ -25,8 +30,9 @@ public class TipoCategoria {
 	@Column(name = "sc_descricao")
 	private String descricao;
 
-	public TipoCategoria() {};
-	
+	public TipoCategoria() {
+	};
+
 	public TipoCategoria(Integer id) {
 		setIdTipoCategoria(id);
 	}

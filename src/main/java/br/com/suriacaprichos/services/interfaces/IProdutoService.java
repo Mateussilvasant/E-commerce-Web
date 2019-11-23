@@ -4,6 +4,11 @@ import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 
+/**
+ * @author Mateus Silva
+ *
+ */
+
 import br.com.suriacaprichos.model.Produto;
 
 public interface IProdutoService {

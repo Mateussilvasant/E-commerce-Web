@@ -4,6 +4,11 @@ import br.com.suriacaprichos.model.Categoria;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+/**
+ * @author Mateus Silva
+ *
+ */
+
 @Repository
 public interface CategoriaRepository extends JpaRepository<Categoria, Integer> {
 

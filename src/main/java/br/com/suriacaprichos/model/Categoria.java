@@ -11,7 +11,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 /**
- * @author mateu
+ * @author Mateus Silva
  *
  */
 @Entity
@@ -55,6 +55,13 @@ public class Categoria {
 
 	public void setTipoCategoria(TipoCategoria tipoCategoria) {
 		this.tipoCategoria = tipoCategoria;
+	}
+
+	public Categoria criarCategoria(int tipoCategoria, Produto produto) {
+		Categoria categoria = new Categoria();
+		categoria.setTipoCategoria(new TipoCategoria(tipoCategoria));
+		categoria.setProduto(produto);
+		return categoria;
 	}
 
 }

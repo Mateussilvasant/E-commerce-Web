@@ -9,6 +9,11 @@ import org.springframework.stereotype.Repository;
 
 import br.com.suriacaprichos.model.TipoCategoria;
 
+/**
+ * @author Mateus Silva
+ *
+ */
+
 @Repository
 public interface TipoCategoriaRepository extends JpaRepository<TipoCategoria, Integer> {
 

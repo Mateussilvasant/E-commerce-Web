@@ -1,6 +1,5 @@
 package br.com.suriacaprichos.controller;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -18,9 +17,13 @@ import org.springframework.web.servlet.ModelAndView;
 
 import br.com.suriacaprichos.model.Categoria;
 import br.com.suriacaprichos.model.Produto;
-import br.com.suriacaprichos.model.TipoCategoria;
 import br.com.suriacaprichos.services.CategoriaService;
 import br.com.suriacaprichos.services.ProdutoService;
+
+/**
+ * @author Mateus Silva
+ *
+ */
 
 @Controller
 @RequestMapping("/produtos")
@@ -58,7 +61,7 @@ public class ProdutoController {
 
 		Produto produtoCadastrado = produtoService.cadastrarProduto(produto);
 
-		List<Categoria> categorias = getCategorias(Arrays.asList(categoriasIDs), produtoCadastrado);
+		List<Categoria> categorias = categoriaService.criarCategorias(Arrays.asList(categoriasIDs), produtoCadastrado);
 
 		int categoriasQTD = categoriaService.incluirCategorias(categorias);
 
@@ -84,20 +87,6 @@ public class ProdutoController {
 		}
 
 		return model;
-	}
-
-	private List<Categoria> getCategorias(List<Integer> categoriasIDs, Produto produto) {
-		List<Categoria> categorias = new ArrayList<>();
-
-		categoriasIDs.forEach(i -> {
-			Categoria categoria = new Categoria();
-			categoria.setTipoCategoria(new TipoCategoria(i));
-			categoria.setProduto(produto);
-			categorias.add(categoria);
-
-		});
-
-		return categorias;
 	}
 
 }

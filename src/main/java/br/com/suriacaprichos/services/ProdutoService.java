@@ -14,6 +14,11 @@ import br.com.suriacaprichos.model.Produto;
 import br.com.suriacaprichos.repositories.ProdutoRepository;
 import br.com.suriacaprichos.services.interfaces.IProdutoService;
 
+/**
+ * @author Mateus Silva
+ *
+ */
+
 @Service
 public class ProdutoService implements IProdutoService {
 
