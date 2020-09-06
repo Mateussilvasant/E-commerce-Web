@@ -1,4 +1,4 @@
-package br.com.ecommerce.model;
+package br.com.ecommerce.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,9 +10,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -22,6 +23,7 @@ import lombok.NoArgsConstructor;
  *
  */
 
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -32,14 +34,11 @@ public class CategoriaProduto {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id_categoria_produto")
-	private Integer idCategoria;
+	private Integer id;
 
-	@NotNull
+	@JsonBackReference
 	@EqualsAndHashCode.Exclude
 	@JoinColumn(name = "id_produto")
-	@JsonIgnoreProperties({
-		"categorias"
-	})
 	@ManyToOne
 	private Produto produto;
 

@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import br.com.ecommerce.model.Categoria;
+import br.com.ecommerce.entities.Categoria;
 
 /**
  * @author Mateus Silva

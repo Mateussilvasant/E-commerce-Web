@@ -8,7 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
-import br.com.ecommerce.model.Produto;
+import br.com.ecommerce.entities.Produto;
 import br.com.ecommerce.repositories.ProdutoRepository;
 import br.com.ecommerce.services.interfaces.IProdutoService;
 
@@ -20,8 +20,12 @@ import br.com.ecommerce.services.interfaces.IProdutoService;
 @Service
 public class ProdutoService implements IProdutoService {
 
-	@Autowired
 	private ProdutoRepository repositorio;
+
+	@Autowired
+	public ProdutoService(ProdutoRepository repositorio){
+		this.repositorio =  repositorio;
+	}
 
 	@Override
 	public Produto cadastrarProduto(Produto produto) {
@@ -35,7 +39,7 @@ public class ProdutoService implements IProdutoService {
 	@Override
 	public Optional<Produto> alterarProduto(Produto produtoAlterado) {
 
-		Optional<Produto> produtoOriginal = consultarProduto(produtoAlterado.getIdProduto());
+		Optional<Produto> produtoOriginal = consultarProduto(produtoAlterado.getId());
 
 		if (produtoOriginal.isPresent()) {
 
@@ -63,6 +67,11 @@ public class ProdutoService implements IProdutoService {
 	public Produto consultarProdutoPorNome(String nomeProduto) {
 		Produto produto = repositorio.findByNome(nomeProduto);
 		return produto;
+	}
+
+	@Override
+	public boolean existeProduto(Integer id) {
+		return repositorio.existsById(id);
 	}
 
 }

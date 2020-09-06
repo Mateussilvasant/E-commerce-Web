@@ -1,4 +1,4 @@
-package br.com.ecommerce.model;
+package br.com.ecommerce.entities;
 
 import java.util.Set;
 
@@ -37,7 +37,7 @@ public class Produto {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id_Produto")
-	private Integer idProduto;
+	private Integer id;
 
 	@Column(name = "nome")
 	@NotBlank
@@ -59,9 +59,9 @@ public class Produto {
 	@Column(name = "status")
 	private String status;
 
+	@JsonManagedReference
 	@Valid
 	@EqualsAndHashCode.Exclude	 
-	@JsonManagedReference
 	@OneToMany(
 		mappedBy = "produto",
 		fetch = FetchType.LAZY,

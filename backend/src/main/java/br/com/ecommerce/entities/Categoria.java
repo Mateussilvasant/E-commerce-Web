@@ -1,4 +1,4 @@
-package br.com.ecommerce.model;
+package br.com.ecommerce.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -6,9 +6,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotBlank;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -17,6 +18,7 @@ import lombok.NoArgsConstructor;
  *
  */
 
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -27,13 +29,13 @@ public class Categoria {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id_categoria")
-	private Integer idCategoria;
+	private Integer id;
 
-	@NotNull
+	@NotBlank
 	@Column(name = "nome")
 	private String nome;
 
-	@NotNull
+	@NotBlank
 	@Column(name = "descricao")
 	private String descricao;
 
